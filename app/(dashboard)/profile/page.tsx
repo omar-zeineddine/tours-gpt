@@ -1,7 +1,6 @@
 import React from 'react';
+import { UserProfile } from '@clerk/nextjs';
 
-type Props = {};
-
-export default function ProfilePage({}: Props) {
-  return <div>ProfilePage</div>;
+export default function ProfilePage() {
+  return <UserProfile />;
 }
