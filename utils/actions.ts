@@ -109,7 +109,7 @@ export const getExistingTour = async ({
   })
 }
 
-export const generateAllTours = async (searchQuery: string) => {
+export const generateAllTours = async (searchQuery?: string) => {
   if (!searchQuery) {
     const tours = await prisma.tour.findMany({
       orderBy: {
@@ -135,4 +135,5 @@ export const generateAllTours = async (searchQuery: string) => {
       city: 'asc',
     },
   })
+  return tours
 }
