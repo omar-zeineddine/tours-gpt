@@ -124,9 +124,13 @@ export const generateAllTours = async (searchQuery?: string) => {
         {
           city: {
             contains: searchQuery,
+            mode: 'insensitive', // Optional: Makes the search case-insensitive
           },
+        },
+        {
           country: {
             contains: searchQuery,
+            mode: 'insensitive', // Optional: Makes the search case-insensitive
           },
         },
       ],

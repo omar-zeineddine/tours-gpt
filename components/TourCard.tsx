@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 const TourCard = ({ tour }: any) => {
-  console.log('tour', tour)
+  // console.log('tour', tour)
   const { city, id, country } = tour
   return (
     <Link

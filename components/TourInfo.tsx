@@ -5,7 +5,7 @@ interface Tour {
 }
 
 const TourInfo = ({ tour }: { tour: Tour }) => {
-  console.log(tour)
+  // console.log(tour)
   const { title, description, stops } = tour
   return (
     <div className="max-w-2xl">
