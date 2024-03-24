@@ -57,12 +57,17 @@ If you can't find info on exact ${city}, or ${city} does not exist, or it's popu
       model: 'gpt-3.5-turbo',
       temperature: 0,
     })
-
-    const tourData = JSON.parse(response.choices[0].message.content)
-    if (!tourData.tour) {
+    if (response.choices[0].message.content) {
+      const tourData = JSON.parse(response.choices[0].message.content as string) // Type assertion to string
+      if (!tourData.tour) {
+        return null
+      }
+      // Check if response.usage is not undefined before accessing total_tokens
+      const tokens = response.usage ? response.usage.total_tokens : 0 // Provide a default value if undefined
+      return { tour: tourData.tour, tokens }
+    } else {
       return null
     }
-    return { tour: tourData.tour, tokens: response.usage.total_tokens }
   } catch (error) {
     console.log(error)
     return null

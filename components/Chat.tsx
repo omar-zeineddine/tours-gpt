@@ -1,33 +1,38 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { generateChatResponse } from '@/utils/actions';
-import { toast } from 'sonner';
+import React from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { generateChatResponse } from '@/utils/actions'
+import { toast } from 'sonner'
 
 const Chat = () => {
-  const [text, setText] = React.useState('');
-  const [messages, setMessages] = React.useState<any[]>([]);
+  const [text, setText] = React.useState('')
+  const [messages, setMessages] = React.useState<any[]>([])
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending } = useMutation<
+    any,
+    any,
+    { role: string; content: string },
+    any
+  >({
     mutationFn: (query) => generateChatResponse([...messages, query]),
     onSuccess: (data) => {
       if (!data) {
-        toast.error('Something went wrong');
-        return;
+        toast.error('Something went wrong')
+        return
       }
-      setMessages((prev) => [...prev, data]);
+      setMessages((prev) => [...prev, data])
     },
-  });
+  })
 
   const handleSubmit = (e: any) => {
-    e.preventDefault();
+    e.preventDefault()
     // console.log(text);
-    const query = { role: 'user', content: text };
-    mutate(query);
-    setMessages((prev) => [...prev, query]);
-    setText('');
-  };
+    const query = { role: 'user', content: text }
+    mutate(query)
+    setMessages((prev) => [...prev, query])
+    setText('')
+  }
 
   // console.log(messages);
 
@@ -35,8 +40,8 @@ const Chat = () => {
     <div className="min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]">
       <div>
         {messages.map(({ role, content }, index) => {
-          const avatar = role == 'user' ? '👤' : '🤖';
-          const bgColor = role == 'user' ? 'bg-base-200' : 'bg-base-100';
+          const avatar = role == 'user' ? '👤' : '🤖'
+          const bgColor = role == 'user' ? 'bg-base-200' : 'bg-base-100'
           return (
             <div
               key={index}
@@ -45,7 +50,7 @@ const Chat = () => {
               <span className="mr-4">{avatar}</span>
               <p className="max-w-7xl">{content}</p>
             </div>
-          );
+          )
         })}
         {isPending ? <span className="loading mt-2"></span> : null}
       </div>
@@ -69,7 +74,7 @@ const Chat = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Chat;
+export default Chat

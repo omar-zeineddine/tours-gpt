@@ -67,8 +67,7 @@ const NewTour = () => {
         </div>
       </form>
       <div className="mt-16">
-        {/* {tour ? <TourInfo tour={tour.tour} /> : null} */}
-        {tour ? <TourInfo tour={tour.tour} /> : null}
+        {tour && 'tour' in tour ? <TourInfo tour={tour.tour} /> : null}
       </div>
     </>
   )
